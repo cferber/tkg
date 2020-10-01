@@ -1,25 +1,25 @@
 cert-manager-timeout: 30m0s
-overridesFolder: HOME/.tkg/overrides
+overridesFolder: /root/.tkg/overrides
 NODE_STARTUP_TIMEOUT: 20m
 BASTION_HOST_ENABLED: "true"
 providers:
   - name: cluster-api
-    url: HOME/.tkg/providers/cluster-api/v0.3.6/core-components.yaml
+    url: /root/.tkg/providers/cluster-api/v0.3.6/core-components.yaml
     type: CoreProvider
   - name: aws
-    url: HOME/.tkg/providers/infrastructure-aws/v0.5.4/infrastructure-components.yaml
+    url: /root/.tkg/providers/infrastructure-aws/v0.5.4/infrastructure-components.yaml
     type: InfrastructureProvider
   - name: vsphere
-    url: HOME/.tkg/providers/infrastructure-vsphere/v0.6.6/infrastructure-components.yaml
+    url: /root/.tkg/providers/infrastructure-vsphere/v0.6.6/infrastructure-components.yaml
     type: InfrastructureProvider
   - name: tkg-service-vsphere
-    url: HOME/.tkg/providers/infrastructure-tkg-service-vsphere/v1.0.0/unused.yaml
+    url: /root/.tkg/providers/infrastructure-tkg-service-vsphere/v1.0.0/unused.yaml
     type: InfrastructureProvider
   - name: kubeadm
-    url: HOME/.tkg/providers/bootstrap-kubeadm/v0.3.6/bootstrap-components.yaml
+    url: /root/.tkg/providers/bootstrap-kubeadm/v0.3.6/bootstrap-components.yaml
     type: BootstrapProvider
   - name: kubeadm
-    url: HOME/.tkg/providers/control-plane-kubeadm/v0.3.6/control-plane-components.yaml
+    url: /root/.tkg/providers/control-plane-kubeadm/v0.3.6/control-plane-components.yaml
     type: ControlPlaneProvider
 images:
     all:
@@ -50,6 +50,6 @@ tkg:
     regions:
       - name: tkg-mgmt-14
         context: tkg-mgmt-14-admin@tkg-mgmt-14
-        file: HOME/.kube-tkg/config
+        file: /root/.kube-tkg/config
         isCurrentContext: false
     current-region-context: tkg-mgmt-14-admin@tkg-mgmt-14
