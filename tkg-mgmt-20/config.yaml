@@ -1,0 +1,55 @@
+cert-manager-timeout: 30m0s
+overridesFolder: HOME/.tkg/overrides
+NODE_STARTUP_TIMEOUT: 20m
+BASTION_HOST_ENABLED: "true"
+providers:
+  - name: cluster-api
+    url: HOME/.tkg/providers/cluster-api/v0.3.6/core-components.yaml
+    type: CoreProvider
+  - name: aws
+    url: HOME/.tkg/providers/infrastructure-aws/v0.5.4/infrastructure-components.yaml
+    type: InfrastructureProvider
+  - name: vsphere
+    url: HOME/.tkg/providers/infrastructure-vsphere/v0.6.6/infrastructure-components.yaml
+    type: InfrastructureProvider
+  - name: tkg-service-vsphere
+    url: HOME/.tkg/providers/infrastructure-tkg-service-vsphere/v1.0.0/unused.yaml
+    type: InfrastructureProvider
+  - name: kubeadm
+    url: HOME/.tkg/providers/bootstrap-kubeadm/v0.3.6/bootstrap-components.yaml
+    type: BootstrapProvider
+  - name: kubeadm
+    url: HOME/.tkg/providers/control-plane-kubeadm/v0.3.6/control-plane-components.yaml
+    type: ControlPlaneProvider
+images:
+    all:
+        repository: registry.tkg.vmware.run/cluster-api
+    cert-manager:
+        repository: registry.tkg.vmware.run/cert-manager
+        tag: v0.11.0_vmware.1
+release:
+    version: v1.1.3
+VSPHERE_SSH_AUTHORIZED_KEY: "AAAAB3NzaC1yc2EAAAADAQABAAABgQDSSbOhsQNWyfTHa7iVUUDlYnld/k8j+gMw8Lt+bULiR+/LMYfpEh03GcISPIY+MbprdkWAaStiKYxbkDAEwM1JClAfQfXDppYkJpFefy0hG5/mg6oIZkzS53KbKa965BzvKP0jEZOSLJX1oDIuQeMjA/wkZ+H84UQRSgBrxRZObwCjtkMN2o9rvMhXluIXRK/OlNGbAPOER2rfmQc8ngZpt2RHJ3A+J0NUPKwyUhoxZArGKg1R8pOUnXtlDH5b5bOrm2GgJ1CJMCt5eLlPCy/b57ZfPUF7buOKL7nvsVHa58OeTLS02MkALcG35Yr5SWC2p9O8SGtqU5T3F61tMc5/WBiDynxDB55RWkcX3QSP+579o5ZWaQoYbdhg2cEw7tG0IW+b2QaXAdbdYe42Pgol/hxj8lBIx5XFkm0ppBm/vS5kI57sZxIc+aXy3V+e/TFf2TlLdsdjyVgPJAM7xF6PoJeKHoyX5LHqD2TiRP9iuEu0YFDh/bkNt8RwqXtbNvs="
+CLUSTER_CIDR: 100.96.0.0/11
+VSPHERE_DATACENTER: /SPACE-DC
+VSPHERE_DATASTORE: /SPACE-DC/datastore/QNAP-SSD-01
+VSPHERE_RESOURCE_POOL: /SPACE-DC/host/Cluster-01/Resources
+VSPHERE_FOLDER: /SPACE-DC/vm/TKG/tkg-mgmt-20
+VSPHERE_MEM_MIB: 2048
+VSPHERE_PASSWORD: <encoded:Vk13YXJlMSE=>
+# VSPHERE_TEMPLATE will be autodetected based on the kubernetes version. Please use VSPHERE_TEMPLATE only to override this behavior
+VSPHERE_TEMPLATE: /SPACE-DC/vm/TKG/Templates/photon-3-kube-v1.18.6_vmware.1
+VSPHERE_DISK_GIB: 20
+VSPHERE_SERVER: vc02.space.local
+VSPHERE_NETWORK: DEVNET02
+SERVICE_CIDR: 100.64.0.0/13
+VSPHERE_USERNAME: administrator@vsphere.local
+VSPHERE_NUM_CPUS: 1
+VSPHERE_HAPROXY_TEMPLATE: /SPACE-DC/vm/TKG/Templates/photon-3-haproxy-v1.2.4-vmware.1
+tkg:
+    regions:
+      - name: tkg-mgmt-20
+        context: tkg-mgmt-20-admin@tkg-mgmt-20
+        file: HOME/.kube-tkg/config
+        isCurrentContext: false
+    current-region-context: tkg-mgmt-20-admin@tkg-mgmt-20
